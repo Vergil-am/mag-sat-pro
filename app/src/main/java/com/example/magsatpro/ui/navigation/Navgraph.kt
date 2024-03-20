@@ -23,7 +23,7 @@ fun NavGraph(
     val navController = rememberNavController()
     Scaffold (
         bottomBar = {
-            BottomNavBar(navController)
+            BottomNavBar(navController, )
 
         }
     ) {
