@@ -8,7 +8,7 @@ import javax.inject.Inject
 class AuthRepoImplementation @Inject constructor(
     private val api: AuthAPI
 ) : AuthRepo {
-    override fun login(code: Int, mac: String, model: String): LoginDTO {
+    override suspend fun login(code: Int, mac: String, model: String): LoginDTO {
         return api.login(code, mac, model)
     }
 }

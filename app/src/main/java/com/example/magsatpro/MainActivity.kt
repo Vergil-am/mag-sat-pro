@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.example.magsatpro.ui.components.BottomNavBar
 import com.example.magsatpro.ui.navigation.NavGraph
+import com.example.magsatpro.ui.presentation.home.HomeViewModel
 import com.example.magsatpro.ui.theme.MagSatProTheme
 import com.exyte.animatednavbar.AnimatedNavigationBar
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,15 +33,19 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val viewModel by viewModels<MainViewModel>()
+    private val homeViewModel: HomeViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             val viewModel = viewModel
             val state by viewModel.state.collectAsState()
+            val updateIndex : (index: Int) -> Unit = {
+                viewModel.updateStartIndex(it)
+            }
             MagSatProTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    NavGraph(startDestination = state.startDestination, startIndex = state.startIndex)
+                    NavGraph(startDestination = state.startDestination, startIndex = state.startIndex, updateIndex = updateIndex, homeViewModel = homeViewModel)
 
                 }
             }

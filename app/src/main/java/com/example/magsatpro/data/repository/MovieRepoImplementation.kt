@@ -10,15 +10,15 @@ import javax.inject.Inject
 class MovieRepoImplementation @Inject constructor(
     private val api: MoviesAPI
 ) : MovieRepo {
-    override fun getMovies(category: Int?): MoviesDTO {
+    override suspend fun getMovies(category: Int?): MoviesDTO {
         return api.getMovies(category = category)
     }
 
-    override fun getMovieInfo(id: Int): MovieInfoDTO {
+    override suspend fun getMovieInfo(id: Int): MovieInfoDTO {
         return api.getMovieInfo(id = id)
     }
 
-    override fun getMovieCategories(): CategoriesDTO {
+    override suspend fun getMovieCategories(): CategoriesDTO {
         return api.getMovieCategories()
     }
 }

@@ -4,15 +4,15 @@ import com.example.magsatpro.data.remote.dto.series.SeriesDTO
 import com.example.magsatpro.data.remote.dto.series.SeriesInfoDTO
 
 interface SeriesRepo {
-    fun getSeries(
+    suspend fun getSeries(
         category: Int?,
     ): SeriesDTO
 
-    fun getSeriesInfo(
+    suspend fun getSeriesInfo(
         id: Int,
     ): SeriesInfoDTO
 
-    fun getSeriesCategories(
+    suspend fun getSeriesCategories(
     ): SeriesDTO
 
 

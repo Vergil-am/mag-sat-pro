@@ -9,11 +9,11 @@ import javax.inject.Inject
 class ChannelRepoImplementation @Inject constructor(
     private val api: ChannelsAPI
 ) : ChannelsRepo {
-    override fun getChannels(category: Int?): ChannelsDTO {
+    override suspend fun getChannels(category: Int?): ChannelsDTO {
         return api.getChannels(category = category)
     }
 
-    override fun getChannelCategories(): CategoriesDTO {
+    override suspend fun getChannelCategories(): CategoriesDTO {
         return api.getChannelCategories()
     }
 }

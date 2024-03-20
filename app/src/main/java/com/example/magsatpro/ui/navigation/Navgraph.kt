@@ -13,17 +13,21 @@ import com.example.magsatpro.ui.components.BottomNavBar
 import com.example.magsatpro.ui.presentation.browse.Browse
 import com.example.magsatpro.ui.presentation.details.Details
 import com.example.magsatpro.ui.presentation.home.Home
+import com.example.magsatpro.ui.presentation.home.HomeViewModel
 import com.example.magsatpro.ui.presentation.list.Watchlist
 import com.example.magsatpro.ui.presentation.settings.Settings
 
 @Composable
 fun NavGraph(
-    startDestination: String
+    startDestination: String,
+    startIndex: Int?,
+    updateIndex: (index: Int) -> Unit,
+    homeViewModel: HomeViewModel
 ) {
     val navController = rememberNavController()
     Scaffold (
         bottomBar = {
-            BottomNavBar(navController, )
+            BottomNavBar(navController, startIndex, updateIndex)
 
         }
     ) {
@@ -32,7 +36,9 @@ fun NavGraph(
             .padding(it)) {
             NavHost(navController = navController, startDestination = startDestination) {
                 composable(Route.Home.route) {
-                    Home()
+                    Home(
+                        homeViewModel
+                    )
                 }
                 composable(Route.Browse.route) {
                     Browse()

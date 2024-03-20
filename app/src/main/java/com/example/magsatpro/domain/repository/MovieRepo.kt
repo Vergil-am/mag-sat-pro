@@ -5,15 +5,15 @@ import com.example.magsatpro.data.remote.dto.movies.MovieInfoDTO
 import com.example.magsatpro.data.remote.dto.movies.MoviesDTO
 
 interface MovieRepo {
-    fun getMovies(
+    suspend fun getMovies(
         category: Int?,
     ): MoviesDTO
 
-    fun getMovieInfo(
+    suspend fun getMovieInfo(
         id: Int,
     ): MovieInfoDTO
 
-    fun getMovieCategories(
+    suspend fun getMovieCategories(
     ): CategoriesDTO
 
 }

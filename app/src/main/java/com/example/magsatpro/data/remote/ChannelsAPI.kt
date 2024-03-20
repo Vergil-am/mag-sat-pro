@@ -8,14 +8,14 @@ import retrofit2.http.Query
 
 interface ChannelsAPI {
     @GET("android/live")
-    fun getChannels(
+    suspend fun getChannels(
         @Query("action") action: String = "streams",
         @Query("pid") category : Int?,
         @Query("hash") hash: String = Constants.HASH
     ) : ChannelsDTO
 
     @GET("android/live")
-    fun getChannelCategories(
+    suspend fun getChannelCategories(
         @Query("action") action: String = "categories",
         @Query("hash") hash: String = Constants.HASH
     ) : CategoriesDTO

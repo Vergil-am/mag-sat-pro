@@ -9,15 +9,15 @@ import javax.inject.Inject
 class SeriesRepoImplementation @Inject constructor(
     private val api: SeriesAPI
 ) : SeriesRepo {
-    override fun getSeries(category: Int?): SeriesDTO {
+    override suspend fun getSeries(category: Int?): SeriesDTO {
         return api.getSeries(category = category)
     }
 
-    override fun getSeriesInfo(id: Int): SeriesInfoDTO {
+    override suspend fun getSeriesInfo(id: Int): SeriesInfoDTO {
         return api.getSeriesInfo(id = id)
     }
 
-    override fun getSeriesCategories(): SeriesDTO {
+    override suspend fun getSeriesCategories(): SeriesDTO {
         return api.getSeriesCategories()
     }
 }

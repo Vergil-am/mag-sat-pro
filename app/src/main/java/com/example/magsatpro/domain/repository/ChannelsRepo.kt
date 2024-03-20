@@ -4,11 +4,11 @@ import com.example.magsatpro.data.remote.dto.channels.CategoriesDTO
 import com.example.magsatpro.data.remote.dto.channels.ChannelsDTO
 
 interface ChannelsRepo {
-    fun getChannels(
+    suspend fun getChannels(
         category: Int?,
     ): ChannelsDTO
 
-    fun getChannelCategories(
+    suspend fun getChannelCategories(
     ): CategoriesDTO
 
 

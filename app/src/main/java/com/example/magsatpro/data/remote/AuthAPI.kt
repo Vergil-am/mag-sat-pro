@@ -6,7 +6,7 @@ import retrofit2.http.Query
 
 interface AuthAPI {
     @GET("android/login")
-    fun login(
+    suspend fun login(
         @Query("code") code: Int,
         @Query("mac") mac: String,
         @Query("model") model : String,

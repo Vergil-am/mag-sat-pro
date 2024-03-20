@@ -9,21 +9,21 @@ import retrofit2.http.Query
 
 interface MoviesAPI {
     @GET("android/movie")
-    fun getMovies(
+    suspend fun getMovies(
         @Query("action") action: String = "streams",
         @Query("pid") category : Int?,
         @Query("hash") hash: String = Constants.HASH
     ) : MoviesDTO
 
     @GET("android/movie")
-    fun getMovieInfo(
+    suspend fun getMovieInfo(
         @Query("action") action: String = "infoMovie",
         @Query("id") id: Int,
         @Query("hash") hash: String = Constants.HASH
     ) : MovieInfoDTO
 
     @GET("android/movie")
-    fun getMovieCategories(
+    suspend fun getMovieCategories(
         @Query("action") action: String = "infoMovie",
         @Query("hash") hash: String = Constants.HASH
     ) : CategoriesDTO
