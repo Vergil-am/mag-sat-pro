@@ -1,6 +1,7 @@
 package com.example.magsatpro.data.remote
 
 import com.example.magsatpro.data.remote.dto.auth.LoginDTO
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -11,5 +12,5 @@ interface AuthAPI {
         @Query("mac") mac: String,
         @Query("model") model : String,
 
-    ) : LoginDTO
+    ) : Response<LoginDTO>
 }

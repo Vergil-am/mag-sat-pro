@@ -1,6 +1,8 @@
 package com.example.magsatpro.domain.repository
 
 import com.example.magsatpro.data.remote.dto.auth.LoginDTO
+import com.example.magsatpro.util.Resource
+import kotlinx.coroutines.flow.Flow
 
 interface AuthRepo {
     suspend fun login(
@@ -8,5 +10,5 @@ interface AuthRepo {
         mac: String,
         model: String,
 
-        ): LoginDTO
+        ): Flow<Resource<LoginDTO>>
 }

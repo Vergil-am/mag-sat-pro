@@ -2,18 +2,20 @@ package com.example.magsatpro.domain.repository
 
 import com.example.magsatpro.data.remote.dto.series.SeriesDTO
 import com.example.magsatpro.data.remote.dto.series.SeriesInfoDTO
+import com.example.magsatpro.util.Resource
+import kotlinx.coroutines.flow.Flow
 
 interface SeriesRepo {
     suspend fun getSeries(
         category: Int?,
-    ): SeriesDTO
+    ): Flow<Resource<SeriesDTO>>
 
     suspend fun getSeriesInfo(
         id: Int,
-    ): SeriesInfoDTO
+    ): Flow<Resource<SeriesInfoDTO>>
 
     suspend fun getSeriesCategories(
-    ): SeriesDTO
+    ): Flow<Resource<SeriesDTO>>
 
 
 }

@@ -6,6 +6,7 @@ converterScalars = "2.9.0"
 engageCore = "1.4.0"
 hiltAndroid = "2.51"
 hiltAndroidCompiler = "2.48.1"
+hiltAndroidCompilerVersion = "2.51"
 kotlin = "1.9.0"
 coreKtx = "1.12.0"
 junit = "4.13.2"
@@ -27,6 +28,7 @@ converter-scalars = { module = "com.squareup.retrofit2:converter-scalars", versi
 engage-core = { module = "com.google.android.engage:engage-core", version.ref = "engageCore" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
+hilt-android-compiler-v251 = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompilerVersion" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltAndroid" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

@@ -34,13 +34,14 @@ object AppModule {
             .build()
             .create(MoviesAPI::class.java)
     }
-
     @Provides
     @Singleton
     fun provideMoviesRepo(api: MoviesAPI) : MovieRepo {
         return MovieRepoImplementation(api)
 
     }
+
+
 
     @Provides
     @Singleton
@@ -67,9 +68,10 @@ object AppModule {
             .build()
             .create(ChannelsAPI::class.java)
     }
+
     @Provides
     @Singleton
-    fun provideChannelsRepo(api: ChannelsAPI) : ChannelsRepo{
+    fun provideChannelsRepo(api: ChannelsAPI) : ChannelsRepo {
         return ChannelRepoImplementation(api)
 
     }
@@ -84,9 +86,11 @@ object AppModule {
             .build()
             .create(AuthAPI::class.java)
     }
+
+
     @Provides
     @Singleton
-    fun provideAuthRepo(api: AuthAPI) : AuthRepo{
+    fun provideAuthRepo(api: AuthAPI) : AuthRepo {
         return AuthRepoImplementation(api)
 
     }

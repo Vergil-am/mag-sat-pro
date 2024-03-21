@@ -86,9 +86,7 @@ dependencies {
     // Dagger hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
-
-
-
+    implementation(libs.engage.core)
 
 
 }

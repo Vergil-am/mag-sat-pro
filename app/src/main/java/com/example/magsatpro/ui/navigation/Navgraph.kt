@@ -22,7 +22,7 @@ fun NavGraph(
     startDestination: String,
     startIndex: Int?,
     updateIndex: (index: Int) -> Unit,
-    homeViewModel: HomeViewModel
+//    homeViewModel: HomeViewModel
 ) {
     val navController = rememberNavController()
     Scaffold (
@@ -37,7 +37,7 @@ fun NavGraph(
             NavHost(navController = navController, startDestination = startDestination) {
                 composable(Route.Home.route) {
                     Home(
-                        homeViewModel
+//                        homeViewModel
                     )
                 }
                 composable(Route.Browse.route) {
