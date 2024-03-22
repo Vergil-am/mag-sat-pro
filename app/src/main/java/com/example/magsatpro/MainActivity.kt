@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import com.example.magsatpro.ui.navigation.NavGraph
 import com.example.magsatpro.ui.presentation.home.HomeViewModel
 import com.example.magsatpro.ui.theme.MagSatProTheme
+import org.koin.androidx.compose.koinViewModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 //@AndroidEntryPoint
@@ -36,7 +37,8 @@ class MainActivity : ComponentActivity() {
                 viewModel.updateStartIndex(it)
             }
             MagSatProTheme {
-                val homeViewModel = getViewModel<HomeViewModel>()
+//                val homeViewModel = koinViewModel<HomeViewModel>()
+
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
