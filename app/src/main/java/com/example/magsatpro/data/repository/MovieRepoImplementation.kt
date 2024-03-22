@@ -9,9 +9,8 @@ import com.example.magsatpro.domain.repository.MovieRepo
 import com.example.magsatpro.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
 
-class MovieRepoImplementation @Inject constructor(
+class MovieRepoImplementation (
     private val api: MoviesAPI
 ) : MovieRepo {
     override suspend fun getMovies(category: Int?): Flow<Resource<MoviesDTO>> = flow {

@@ -13,28 +13,19 @@ import androidx.compose.ui.Modifier
 import com.example.magsatpro.ui.navigation.NavGraph
 import com.example.magsatpro.ui.theme.MagSatProTheme
 
-//@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-//    private val moviesAPI = get<MoviesAPI>()
-//    private val seriesAPI = get<SeriesAPI>()
-//    private val channelsAPI= get<ChannelsAPI>()
-//    private val authAPI = get<AuthAPI>()
-
     private val viewModel by viewModels<MainViewModel>()
-//    private val homeViewModel by viewModels<HomeViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             val viewModel = viewModel
-//            val homeViewModel = homeViewModel
 
             val state by viewModel.state.collectAsState()
             val updateIndex: (index: Int) -> Unit = {
                 viewModel.updateStartIndex(it)
             }
             MagSatProTheme {
-//                val homeViewModel = koinViewModel<HomeViewModel>()
 
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -45,7 +36,6 @@ class MainActivity : ComponentActivity() {
                         startDestination = state.startDestination,
                         startIndex = state.startIndex,
                         updateIndex = updateIndex,
-//                        homeViewModel = homeViewModel
                     )
 
                 }

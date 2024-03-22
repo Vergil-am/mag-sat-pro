@@ -65,7 +65,7 @@ val KoinAppModule = module {
     }
 
     viewModel<HomeViewModel> {
-        HomeViewModel(get())
+        HomeViewModel(get(), get(), get())
 
     }
 }

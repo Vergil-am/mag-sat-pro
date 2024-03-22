@@ -6,9 +6,8 @@ import com.example.magsatpro.domain.repository.AuthRepo
 import com.example.magsatpro.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
 
-class AuthRepoImplementation @Inject constructor(
+class AuthRepoImplementation (
     private val api: AuthAPI
 ) : AuthRepo {
     override suspend fun login(code: Int, mac: String, model: String): Flow<Resource<LoginDTO>>  = flow {

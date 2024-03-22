@@ -7,9 +7,8 @@ import com.example.magsatpro.domain.repository.SeriesRepo
 import com.example.magsatpro.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
 
-class SeriesRepoImplementation @Inject constructor(
+class SeriesRepoImplementation (
     private val api: SeriesAPI
 ) : SeriesRepo {
     override suspend fun getSeries(category: Int?): Flow<Resource<SeriesDTO>> = flow {

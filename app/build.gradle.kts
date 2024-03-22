@@ -1,8 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    kotlin("kapt")
-    id("com.google.dagger.hilt.android")
 
 }
 
@@ -83,19 +81,7 @@ dependencies {
     // Animated navigation bottom bar
     implementation(libs.animated.navigation.bar)
 
-    // Dagger hilt
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
-    implementation(libs.engage.core)
-
-
-    //Koin
-//    val koin_android_compose_version = "3.6.0-wasm-alpha2"
+    //Koin - dependency injection
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
-//    implementation(libs.cokoin.androidx.compose.navigation)
-}
-
-kapt {
-    correctErrorTypes = true
 }

@@ -7,9 +7,8 @@ import com.example.magsatpro.domain.repository.ChannelsRepo
 import com.example.magsatpro.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
 
-class ChannelRepoImplementation @Inject constructor(
+class ChannelRepoImplementation (
     private val api: ChannelsAPI
 ) : ChannelsRepo {
     override suspend fun getChannels(category: Int?): Flow<Resource<ChannelsDTO >> = flow {
