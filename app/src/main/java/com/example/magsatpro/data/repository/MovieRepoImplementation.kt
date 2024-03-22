@@ -1,5 +1,6 @@
 package com.example.magsatpro.data.repository
 
+import android.util.Log
 import com.example.magsatpro.data.remote.MoviesAPI
 import com.example.magsatpro.data.remote.dto.movies.CategoriesDTO
 import com.example.magsatpro.data.remote.dto.movies.MovieInfoDTO
@@ -14,6 +15,7 @@ class MovieRepoImplementation @Inject constructor(
     private val api: MoviesAPI
 ) : MovieRepo {
     override suspend fun getMovies(category: Int?): Flow<Resource<MoviesDTO>> = flow {
+        Log.e("Function repo", "Ran")
         try {
             val res = api.getMovies(category = category)
             emit(Resource.Success(res.body()))

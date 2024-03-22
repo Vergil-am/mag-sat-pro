@@ -2,17 +2,26 @@ package com.example.magsatpro.ui.presentation.home
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.magsatpro.domain.repository.MovieRepo
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
-@HiltViewModel
-class HomeViewModel @Inject constructor(
-    private val movies: MovieRepo
+class HomeViewModel (
+    private val movies : MovieRepo
 ) : ViewModel() {
 
     init {
-        Log.e("Home viewModel", "Initialized")
+        getMovies()
+    }
+
+    fun getMovies() {
+        Log.e("Function", "Ran")
+        viewModelScope.launch {
+            movies.getMovies(null).onEach {
+                Log.e("Movies", it.toString())
+            }
+        }
     }
 
 

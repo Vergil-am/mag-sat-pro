@@ -89,6 +89,11 @@ dependencies {
     implementation(libs.engage.core)
 
 
+    //Koin
+//    val koin_android_compose_version = "3.6.0-wasm-alpha2"
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+//    implementation(libs.cokoin.androidx.compose.navigation)
 }
 
 kapt {

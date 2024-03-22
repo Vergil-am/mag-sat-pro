@@ -12,85 +12,62 @@ import com.example.magsatpro.domain.repository.AuthRepo
 import com.example.magsatpro.domain.repository.ChannelsRepo
 import com.example.magsatpro.domain.repository.MovieRepo
 import com.example.magsatpro.domain.repository.SeriesRepo
-import com.example.magsatpro.util.Constants.BASE_URL
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import com.example.magsatpro.ui.presentation.home.HomeViewModel
+import com.example.magsatpro.util.Constants
+import org.koin.androidx.compose.get
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.scope.get
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
-
-@Module
-@InstallIn(SingletonComponent::class)
-object AppModule {
-    @Provides
-    @Singleton
-    fun provideMoviesAPI(): MoviesAPI {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+val KoinAppModule = module {
+    single {
+        Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(MoviesAPI::class.java)
     }
-    @Provides
-    @Singleton
-    fun provideMoviesRepo(api: MoviesAPI) : MovieRepo {
-        return MovieRepoImplementation(api)
+    single<MovieRepo> {
+        MovieRepoImplementation(get())
     }
 
-
-
-    @Provides
-    @Singleton
-    fun provideSeriesAPI(): SeriesAPI {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+    single {
+        Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(SeriesAPI::class.java)
     }
-    @Provides
-    @Singleton
-    fun provideSeriesRepo(api: SeriesAPI) : SeriesRepo {
-        return SeriesRepoImplementation(api)
-
+    single<SeriesRepo> {
+        SeriesRepoImplementation(get())
     }
 
-    @Provides
-    @Singleton
-    fun provideChannelsAPI(): ChannelsAPI {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+    single {
+        Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ChannelsAPI::class.java)
     }
-
-    @Provides
-    @Singleton
-    fun provideChannelsRepo(api: ChannelsAPI) : ChannelsRepo {
-        return ChannelRepoImplementation(api)
-
+    single<ChannelsRepo> {
+        ChannelRepoImplementation(get())
     }
 
-
-    @Provides
-    @Singleton
-    fun provideAuthAPI(): AuthAPI {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+    single {
+        Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(AuthAPI::class.java)
     }
+    single<AuthRepo> {
+        AuthRepoImplementation(get())
+    }
 
-
-    @Provides
-    @Singleton
-    fun provideAuthRepo(api: AuthAPI) : AuthRepo {
-        return AuthRepoImplementation(api)
+    viewModel<HomeViewModel> {
+        HomeViewModel(get())
 
     }
 }
