@@ -14,9 +14,7 @@ import com.example.magsatpro.domain.repository.MovieRepo
 import com.example.magsatpro.domain.repository.SeriesRepo
 import com.example.magsatpro.ui.presentation.home.HomeViewModel
 import com.example.magsatpro.util.Constants
-import org.koin.androidx.compose.get
 import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.core.scope.get
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

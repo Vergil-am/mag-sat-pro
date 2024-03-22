@@ -11,10 +11,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.example.magsatpro.ui.navigation.NavGraph
-import com.example.magsatpro.ui.presentation.home.HomeViewModel
 import com.example.magsatpro.ui.theme.MagSatProTheme
-import org.koin.androidx.compose.koinViewModel
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 //@AndroidEntryPoint
 class MainActivity : ComponentActivity() {

@@ -2,7 +2,6 @@ package com.example.magsatpro.ui.presentation.home
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import org.koin.androidx.compose.getViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
