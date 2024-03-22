@@ -15,13 +15,14 @@ class MovieRepoImplementation @Inject constructor(
     private val api: MoviesAPI
 ) : MovieRepo {
     override suspend fun getMovies(category: Int?): Flow<Resource<MoviesDTO>> = flow {
-        Log.e("Function repo", "Ran")
         try {
             val res = api.getMovies(category = category)
+            Log.e("Res", res.toString())
             emit(Resource.Success(res.body()))
 
         } catch (e :Exception) {
-            emit(Resource.Error(""))
+            e.printStackTrace()
+            emit(Resource.Error("an error occurred ${e.message}"))
         }
     }
 
