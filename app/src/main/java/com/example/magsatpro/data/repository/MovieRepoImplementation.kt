@@ -14,11 +14,11 @@ class MovieRepoImplementation (
     private val api: MoviesAPI
 ) : MovieRepo {
     override suspend fun getMovies(category: Int?): Flow<Resource<MoviesDTO>> = flow {
+        emit(Resource.Loading())
         try {
             val res = api.getMovies(category = category)
             Log.e("Res", res.toString())
             emit(Resource.Success(res.body()))
-
         } catch (e :Exception) {
             e.printStackTrace()
             emit(Resource.Error("an error occurred ${e.message}"))

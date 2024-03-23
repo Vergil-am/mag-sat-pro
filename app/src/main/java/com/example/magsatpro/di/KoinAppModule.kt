@@ -13,6 +13,8 @@ import com.example.magsatpro.domain.repository.ChannelsRepo
 import com.example.magsatpro.domain.repository.MovieRepo
 import com.example.magsatpro.domain.repository.SeriesRepo
 import com.example.magsatpro.ui.presentation.home.HomeViewModel
+import com.example.magsatpro.ui.presentation.movies.MoviesViewModel
+import com.example.magsatpro.ui.presentation.series.SeriesViewModel
 import com.example.magsatpro.util.Constants
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -66,6 +68,14 @@ val KoinAppModule = module {
 
     viewModel<HomeViewModel> {
         HomeViewModel(get(), get(), get())
+    }
+    viewModel<MoviesViewModel> {
+        MoviesViewModel(get())
+    }
+    viewModel<SeriesViewModel> {
+        SeriesViewModel(get())
 
     }
+
+
 }

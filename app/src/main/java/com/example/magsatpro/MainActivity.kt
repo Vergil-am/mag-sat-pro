@@ -1,5 +1,6 @@
 package com.example.magsatpro
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,12 +20,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
             val viewModel = viewModel
-
             val state by viewModel.state.collectAsState()
-            val updateIndex: (index: Int) -> Unit = {
-                viewModel.updateStartIndex(it)
-            }
             MagSatProTheme {
 
                 // A surface container using the 'background' color from the theme
@@ -34,8 +32,6 @@ class MainActivity : ComponentActivity() {
                 ) {
                     NavGraph(
                         startDestination = state.startDestination,
-                        startIndex = state.startIndex,
-                        updateIndex = updateIndex,
                     )
 
                 }

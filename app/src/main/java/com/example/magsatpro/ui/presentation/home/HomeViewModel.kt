@@ -1,6 +1,5 @@
 package com.example.magsatpro.ui.presentation.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.magsatpro.domain.repository.ChannelsRepo
@@ -30,7 +29,6 @@ class HomeViewModel(
     private fun getMovies() {
         viewModelScope.launch {
             movies.getMovies(null).onEach {
-                Log.e("Movies", it.data?.size.toString())
                 _state.value = _state.value.copy(movies = it)
             }.launchIn(viewModelScope)
         }
@@ -40,7 +38,6 @@ class HomeViewModel(
     private fun getSeries() {
         viewModelScope.launch {
             series.getSeries(null).onEach {
-                Log.e("Series", it.data.toString())
                 _state.value = _state.value.copy(series = it)
             }.launchIn(viewModelScope)
         }
@@ -49,8 +46,6 @@ class HomeViewModel(
     private fun getChannels() {
         viewModelScope.launch {
             channels.getChannels(null).onEach {
-
-                Log.e("Channels", it.data.toString())
                 _state.value = _state.value.copy(channels = it)
             }.launchIn(viewModelScope)
         }
