@@ -81,7 +81,18 @@ dependencies {
     // Animated navigation bottom bar
     implementation(libs.animated.navigation.bar)
 
-    //Koin - dependency injection
+    // Koin - dependency injection
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
+
+    // Media 3 Exoplayer
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.exoplayer.dash)
+    implementation(libs.androidx.media3.ui)
+    implementation(libs.androidx.media3.exoplayer.hls)
+
+
+    //Window size
+    implementation(libs.androidx.window)
+    implementation("androidx.compose.material3:material3-window-size-class:1.2.1")
 }

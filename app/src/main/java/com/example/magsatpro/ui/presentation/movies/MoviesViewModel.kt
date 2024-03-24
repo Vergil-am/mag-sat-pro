@@ -11,11 +11,12 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
-class MoviesViewModel (
-   private val repo: MovieRepo
+class MoviesViewModel(
+    private val repo: MovieRepo,
 ) : ViewModel() {
     private val _state = MutableStateFlow(MovieState())
     val state = _state.asStateFlow()
+
 
     init {
         getMovies()
@@ -28,16 +29,19 @@ class MoviesViewModel (
                     is Resource.Loading -> {
                         _state.value = _state.value.copy(isLoading = true)
                     }
-                    is Resource.Error-> {
-                        _state.value = _state.value.copy(isLoading = false , error = it.message)
+
+                    is Resource.Error -> {
+                        _state.value = _state.value.copy(isLoading = false, error = it.message)
                     }
-                    is Resource.Success-> {
+
+                    is Resource.Success -> {
                         _state.value = _state.value.copy(isLoading = false, movies = it.data)
                     }
                 }
             }.launchIn(viewModelScope)
         }
     }
+
     fun selectCategory(id: Int) {
         _state.value = _state.value.copy(cat = id)
     }

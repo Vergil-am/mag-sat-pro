@@ -10,16 +10,16 @@ import com.example.magsatpro.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class MovieRepoImplementation (
+class MovieRepoImplementation(
     private val api: MoviesAPI
 ) : MovieRepo {
     override suspend fun getMovies(category: Int?): Flow<Resource<MoviesDTO>> = flow {
         emit(Resource.Loading())
         try {
             val res = api.getMovies(category = category)
-            Log.e("Res", res.toString())
+            Log.e("Res", res.body().toString())
             emit(Resource.Success(res.body()))
-        } catch (e :Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
             emit(Resource.Error("an error occurred ${e.message}"))
         }
@@ -30,17 +30,17 @@ class MovieRepoImplementation (
             val res = api.getMovieInfo(id = id)
             emit(Resource.Success(res.body()))
 
-        } catch (e :Exception) {
+        } catch (e: Exception) {
             emit(Resource.Error(""))
         }
     }
 
-    override suspend fun getMovieCategories(): Flow<Resource<CategoriesDTO >> = flow {
+    override suspend fun getMovieCategories(): Flow<Resource<CategoriesDTO>> = flow {
         try {
             val res = api.getMovieCategories()
             emit(Resource.Success(res.body()))
 
-        } catch (e :Exception) {
+        } catch (e: Exception) {
             emit(Resource.Error(""))
         }
     }

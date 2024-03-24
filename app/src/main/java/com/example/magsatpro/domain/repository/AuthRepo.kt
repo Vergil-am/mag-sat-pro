@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface AuthRepo {
     suspend fun login(
-        code: Int,
+        code: Long,
         mac: String,
         model: String,
 

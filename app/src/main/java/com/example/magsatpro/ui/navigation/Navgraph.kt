@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.magsatpro.ui.layouts.HomeLayout
 import com.example.magsatpro.ui.presentation.channels.Channels
 import com.example.magsatpro.ui.presentation.details.Details
 import com.example.magsatpro.ui.presentation.home.Home
@@ -26,29 +27,49 @@ fun NavGraph(
     ) {
         NavHost(navController = navController, startDestination = startDestination) {
             composable(Route.Home.route) {
-                Home(
-                    navController
-                )
+                HomeLayout() {
+                    Home(
+                        navController
+                    )
+                }
+
             }
             composable(Route.Channels.route) {
-                Channels()
+
+                HomeLayout() {
+                    Channels()
+                }
             }
             composable(Route.Movies.route) {
-                Movies()
+
+                HomeLayout() {
+                    Movies()
+                }
             }
             composable(Route.Series.route) {
-                Series()
+
+                HomeLayout() {
+                    Series()
+                }
             }
             composable(Route.MovieDetails.route) {
-                Details()
+
+                HomeLayout() {
+                    Details()
+                }
             }
             composable(Route.ShowDetails.route) {
-                Details()
+
+                HomeLayout() {
+                    Details()
+                }
             }
             composable(Route.Settings.route) {
-                Settings()
-            }
 
+                HomeLayout() {
+                    Settings()
+                }
+            }
 
 
         }

@@ -21,19 +21,19 @@ class HomeViewModel(
     val state = _state.asStateFlow()
 
     init {
-        getMovies()
+//        getMovies()
         getSeries()
         getChannels()
     }
 
-    private fun getMovies() {
-        viewModelScope.launch {
-            movies.getMovies(null).onEach {
-                _state.value = _state.value.copy(movies = it)
-            }.launchIn(viewModelScope)
-        }
-
-    }
+//    private fun getMovies() {
+//        viewModelScope.launch {
+//            movies.getMovies(null).onEach {
+//                _state.value = _state.value.copy(movies = it)
+//            }.launchIn(viewModelScope)
+//        }
+//
+//    }
 
     private fun getSeries() {
         viewModelScope.launch {
