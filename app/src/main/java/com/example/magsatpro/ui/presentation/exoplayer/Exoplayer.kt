@@ -1,6 +1,7 @@
 package com.example.magsatpro.ui.presentation.exoplayer
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.OptIn
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
@@ -27,14 +28,19 @@ import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.ui.PlayerView
-import com.example.magsatpro.util.Constants
+import com.example.magsatpro.util.Constants.BASE_URL
+import com.example.magsatpro.util.Constants.HASH
 
 @RequiresApi(Build.VERSION_CODES.R)
 @OptIn(UnstableApi::class)
 @Composable
 fun Exoplayer(
+    type: String?,
+    id: String?,
     windowCompat: WindowInsetsControllerCompat
 ) {
+    val source = "$BASE_URL/android/$type?action=link&id=$id&hash=$HASH"
+    Log.e("Source", source)
     windowCompat.hide(WindowInsetsCompat.Type.systemBars())
     windowCompat.systemBarsBehavior =
         WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
@@ -42,6 +48,7 @@ fun Exoplayer(
     var player by remember {
         mutableStateOf<ExoPlayer?>(null)
     }
+
     var lifecycle by remember {
         mutableStateOf(Lifecycle.Event.ON_CREATE)
     }
@@ -64,7 +71,6 @@ fun Exoplayer(
         }
     }
 
-    val source = "http://ip.magsat.tv:8801/android//live?action=link&id=420&hash=${Constants.HASH}"
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -76,8 +82,6 @@ fun Exoplayer(
                     val dataSourceFactory = DefaultHttpDataSource.Factory()
                     val mediaSourceFactory =
                         DefaultMediaSourceFactory(context).setDataSourceFactory(dataSourceFactory)
-
-
                     val mediaItem = MediaItem.Builder()
                         .setUri(source)
                         .build()
@@ -85,10 +89,19 @@ fun Exoplayer(
                         .setMediaSourceFactory(mediaSourceFactory).build().also { player = it }
                     player?.setMediaItem(mediaItem)
                     player?.prepare()
+
+                    useController = false
+
+
+
                     setShowPreviousButton(false)
                     setShowNextButton(false)
                     setShowSubtitleButton(true)
 
+
+                    setShowSubtitleButton(false)
+                    setShowRewindButton(false)
+                    setShowFastForwardButton(false)
                 }
             },
             modifier = Modifier.fillMaxSize(),

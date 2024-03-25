@@ -1,6 +1,7 @@
 package com.example.magsatpro.ui.presentation.channels
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,12 +17,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.magsatpro.util.Constants.LOGO_BASE_URL
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun Channels() {
+fun Channels(
+    navController: NavController
+) {
     val viewModel = koinViewModel<ChannelsViewModel>()
     val state = viewModel.state.collectAsState().value
     Column {
@@ -56,12 +60,17 @@ fun Channels() {
 
                             item {
                                 ListItem(
+                                    modifier = Modifier.clickable {
+                                        navController.navigate("exoplayer/live/${it.id}")
+
+                                    },
                                     leadingContent = {
                                         Image(
                                             modifier = Modifier
                                                 .height(50.dp)
                                                 .width(50.dp),
-                                            painter = rememberAsyncImagePainter(model =
+                                            painter = rememberAsyncImagePainter(
+                                                model =
                                                 "$LOGO_BASE_URL/chn/${it.id}"
                                             ),
                                             contentDescription = it.nm

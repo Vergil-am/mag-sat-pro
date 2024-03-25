@@ -47,7 +47,9 @@ fun NavGraph(
                 HomeLayout(
                     navController
                 ) {
-                    Channels()
+                    Channels(
+                        navController
+                    )
                 }
             }
             composable(Route.Movies.route) {
@@ -91,7 +93,13 @@ fun NavGraph(
                 }
             }
             composable(Route.Exoplayer.route) {
-                Exoplayer(windowCompat)
+                val type = it.arguments?.getString("type")
+                val id = it.arguments?.getString("id")
+                Exoplayer(
+                    type,
+                    id,
+                    windowCompat
+                    )
             }
 
 

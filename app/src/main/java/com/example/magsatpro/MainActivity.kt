@@ -23,7 +23,6 @@ class MainActivity : ComponentActivity() {
         val windowCompat = WindowCompat.getInsetsController(window, window.decorView)
         setContent {
             val viewModel = koinViewModel<MainViewModel>()
-//            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
             val state by viewModel.state.collectAsState()
             MagSatProTheme {
 

@@ -14,5 +14,5 @@ sealed class Route (
     data object ShowDetails : Route("series/{id}")
 
 
-    data object Exoplayer : Route("player")
+    data object Exoplayer : Route("exoplayer/{type}/{id}")
 }

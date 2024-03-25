@@ -25,7 +25,6 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun Series() {
-
     val viewModel = koinViewModel<SeriesViewModel>()
     val state = viewModel.state.collectAsState()
     val series = if (state.value.cat == null) {
