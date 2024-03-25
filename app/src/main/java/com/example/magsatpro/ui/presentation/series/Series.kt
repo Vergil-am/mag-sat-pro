@@ -6,10 +6,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Card
@@ -33,49 +33,58 @@ fun Series() {
     } else {
         state.value.series?.filter { state.value.cat == it.id }
     }
-    Column {
-        Row(
-            modifier = Modifier
-                .padding(10.dp)
-                .fillMaxWidth()
-                .horizontalScroll(rememberScrollState())
-        ) {
-            state.value.series?.map {
-                FilterChip(
-                    modifier = Modifier.padding(10.dp),
-                    selected = state.value.cat == it.id, onClick = {
-                        viewModel.selectCategory(it.id)
-                    }, label = {
-                        Text(text = it.nm)
-                    })
 
-            }
 
-        }
-        LazyHorizontalGrid(
-            state = rememberLazyGridState(),
-            rows = GridCells.Fixed(2)
-        ) {
-            series?.map { seriesDTO ->
-                seriesDTO.list.map {
-                    item {
-                        Card(
-                            modifier = Modifier
-                                .padding(10.dp)
-                                .width(100.dp)
-                        ) {
-                            Image(
-                                modifier = Modifier.fillMaxSize(),
-                                painter = rememberAsyncImagePainter(model = "${Constants.LOGO_BASE_URL}/serie/${it.id}"),
-                                contentDescription = it.nm
-                            )
+    when (state.value.isLoading) {
+        true -> Text(text = "Loading ... ")
+        false ->
+            Column {
+                Row(
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .fillMaxWidth()
+                        .horizontalScroll(rememberScrollState())
+                ) {
+                    state.value.series?.map {
+                        FilterChip(
+                            modifier = Modifier.padding(10.dp),
+                            selected = state.value.cat == it.id, onClick = {
+                                viewModel.selectCategory(it.id)
+                            }, label = {
+                                Text(text = it.nm)
+                            })
+
+                    }
+
+                }
+                LazyVerticalGrid(
+                    state = rememberLazyGridState(),
+                    columns = GridCells.Adaptive(100.dp),
+                    modifier = Modifier.padding(
+                        horizontal = 20.dp
+                    )
+                ) {
+                    series?.map { seriesDTO ->
+                        seriesDTO.list.map {
+                            item {
+                                Card(
+                                    modifier = Modifier
+                                        .padding(6.dp)
+                                        .height(150.dp)
+                                ) {
+                                    Image(
+                                        modifier = Modifier.fillMaxSize(),
+                                        painter = rememberAsyncImagePainter(model = "${Constants.LOGO_BASE_URL}/serie/${it.id}"),
+                                        contentDescription = it.nm
+                                    )
+                                }
+                            }
+
                         }
                     }
 
                 }
+
             }
-
-        }
-
     }
 }

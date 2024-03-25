@@ -1,23 +1,29 @@
 package com.example.magsatpro.ui.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.magsatpro.ui.layouts.HomeLayout
 import com.example.magsatpro.ui.presentation.channels.Channels
 import com.example.magsatpro.ui.presentation.details.Details
+import com.example.magsatpro.ui.presentation.exoplayer.Exoplayer
 import com.example.magsatpro.ui.presentation.home.Home
 import com.example.magsatpro.ui.presentation.movies.Movies
 import com.example.magsatpro.ui.presentation.series.Series
 import com.example.magsatpro.ui.presentation.settings.Settings
 
+@RequiresApi(Build.VERSION_CODES.R)
 @Composable
 fun NavGraph(
     startDestination: String,
+    windowCompat: WindowInsetsControllerCompat
 ) {
     val navController = rememberNavController()
 
@@ -27,7 +33,9 @@ fun NavGraph(
     ) {
         NavHost(navController = navController, startDestination = startDestination) {
             composable(Route.Home.route) {
-                HomeLayout() {
+                HomeLayout(
+                    navController
+                ) {
                     Home(
                         navController
                     )
@@ -36,39 +44,54 @@ fun NavGraph(
             }
             composable(Route.Channels.route) {
 
-                HomeLayout() {
+                HomeLayout(
+                    navController
+                ) {
                     Channels()
                 }
             }
             composable(Route.Movies.route) {
 
-                HomeLayout() {
+                HomeLayout(
+                    navController
+                ) {
                     Movies()
                 }
             }
             composable(Route.Series.route) {
 
-                HomeLayout() {
+                HomeLayout(
+                    navController
+                ) {
                     Series()
                 }
             }
             composable(Route.MovieDetails.route) {
 
-                HomeLayout() {
+                HomeLayout(
+                    navController
+                ) {
                     Details()
                 }
             }
             composable(Route.ShowDetails.route) {
 
-                HomeLayout() {
+                HomeLayout(
+                    navController
+                ) {
                     Details()
                 }
             }
             composable(Route.Settings.route) {
 
-                HomeLayout() {
+                HomeLayout(
+                    navController
+                ) {
                     Settings()
                 }
+            }
+            composable(Route.Exoplayer.route) {
+                Exoplayer(windowCompat)
             }
 
 

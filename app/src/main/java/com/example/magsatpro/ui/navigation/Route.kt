@@ -12,4 +12,7 @@ sealed class Route (
 
     data object MovieDetails : Route("movies/{id}")
     data object ShowDetails : Route("series/{id}")
+
+
+    data object Exoplayer : Route("player")
 }
