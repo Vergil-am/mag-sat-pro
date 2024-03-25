@@ -1,6 +1,0 @@
-<network-security-config>
-    <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">ip.magsat.tv</domain>
-        <domain includeSubdomains="true">57.128.194.231</domain>
-    </domain-config>
-</network-security-config>

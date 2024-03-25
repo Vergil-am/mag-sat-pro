@@ -68,20 +68,19 @@ fun NavGraph(
                     Series()
                 }
             }
-            composable(Route.MovieDetails.route) {
-
+            composable(Route.Details.route) {
+                val type = it.arguments?.getString("type")
+                val id = it.arguments?.getString("id")?.toIntOrNull()
                 HomeLayout(
                     navController
                 ) {
-                    Details()
-                }
-            }
-            composable(Route.ShowDetails.route) {
-
-                HomeLayout(
-                    navController
-                ) {
-                    Details()
+                    if (type != null && id != null) {
+                        Details(
+                            type,
+                            id,
+                            navController
+                        )
+                    }
                 }
             }
             composable(Route.Settings.route) {
@@ -99,7 +98,7 @@ fun NavGraph(
                     type,
                     id,
                     windowCompat
-                    )
+                )
             }
 
 

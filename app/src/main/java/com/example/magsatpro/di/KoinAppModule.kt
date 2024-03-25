@@ -14,6 +14,7 @@ import com.example.magsatpro.domain.repository.ChannelsRepo
 import com.example.magsatpro.domain.repository.MovieRepo
 import com.example.magsatpro.domain.repository.SeriesRepo
 import com.example.magsatpro.ui.presentation.channels.ChannelsViewModel
+import com.example.magsatpro.ui.presentation.details.DetailsViewModel
 import com.example.magsatpro.ui.presentation.home.HomeViewModel
 import com.example.magsatpro.ui.presentation.movies.MoviesViewModel
 import com.example.magsatpro.ui.presentation.series.SeriesViewModel
@@ -82,6 +83,9 @@ val KoinAppModule = module {
     }
     viewModel<ChannelsViewModel> {
         ChannelsViewModel(get())
+    }
+    viewModel<DetailsViewModel> {
+        DetailsViewModel(get(), get())
     }
 
 
