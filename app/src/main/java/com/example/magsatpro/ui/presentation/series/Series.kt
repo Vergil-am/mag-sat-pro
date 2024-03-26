@@ -19,12 +19,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.magsatpro.util.Constants
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun Series() {
+fun Series(
+    navController: NavController
+) {
     val viewModel = koinViewModel<SeriesViewModel>()
     val state = viewModel.state.collectAsState()
     val series = if (state.value.cat == null) {
@@ -69,7 +72,8 @@ fun Series() {
                                 Card(
                                     modifier = Modifier
                                         .padding(6.dp)
-                                        .height(150.dp)
+                                        .height(150.dp),
+                                    onClick = {navController.navigate("details/serie/${it.id}")}
                                 ) {
                                     Image(
                                         modifier = Modifier.fillMaxSize(),

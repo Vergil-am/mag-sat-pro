@@ -90,18 +90,11 @@ fun Exoplayer(
                     player?.setMediaItem(mediaItem)
                     player?.prepare()
 
-                    useController = false
-
-
+                    useController = type != "live"
 
                     setShowPreviousButton(false)
                     setShowNextButton(false)
-                    setShowSubtitleButton(true)
-
-
                     setShowSubtitleButton(false)
-                    setShowRewindButton(false)
-                    setShowFastForwardButton(false)
                 }
             },
             modifier = Modifier.fillMaxSize(),

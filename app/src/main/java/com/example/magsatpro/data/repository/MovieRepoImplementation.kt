@@ -1,6 +1,5 @@
 package com.example.magsatpro.data.repository
 
-import android.util.Log
 import com.example.magsatpro.data.remote.MoviesAPI
 import com.example.magsatpro.data.remote.dto.movies.CategoriesDTO
 import com.example.magsatpro.data.remote.dto.movies.MovieInfoDTO
@@ -17,7 +16,6 @@ class MovieRepoImplementation(
         emit(Resource.Loading())
         try {
             val res = api.getMovies(category = category)
-            Log.e("Res", res.body().toString())
             emit(Resource.Success(res.body()))
         } catch (e: Exception) {
             e.printStackTrace()
@@ -26,12 +24,13 @@ class MovieRepoImplementation(
     }
 
     override suspend fun getMovieInfo(id: Int): Flow<Resource<MovieInfoDTO>> = flow {
+        emit(Resource.Loading())
         try {
             val res = api.getMovieInfo(id = id)
             emit(Resource.Success(res.body()))
 
         } catch (e: Exception) {
-            emit(Resource.Error(""))
+            emit(Resource.Error("an error occurred ${e.message}"))
         }
     }
 

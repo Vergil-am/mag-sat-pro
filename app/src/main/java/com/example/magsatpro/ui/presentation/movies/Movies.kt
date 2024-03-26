@@ -20,12 +20,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.magsatpro.util.Constants
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun Movies() {
+fun Movies(
+    navController: NavController
+) {
 
     val viewModel = koinViewModel<MoviesViewModel>()
     val state = viewModel.state.collectAsState()
@@ -74,7 +77,10 @@ fun Movies() {
                                     modifier = Modifier
                                         .padding(6.dp)
                                         .height(150.dp)
-                                        .fillMaxWidth()
+                                        .fillMaxWidth(),
+                                    onClick = {
+                                        navController.navigate("details/movie/${it.id}")
+                                    }
                                 ) {
                                     Image(
                                         modifier = Modifier.fillMaxSize(),

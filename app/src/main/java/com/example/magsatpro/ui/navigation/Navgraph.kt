@@ -57,7 +57,9 @@ fun NavGraph(
                 HomeLayout(
                     navController
                 ) {
-                    Movies()
+                    Movies(
+                        navController
+                    )
                 }
             }
             composable(Route.Series.route) {
@@ -65,7 +67,9 @@ fun NavGraph(
                 HomeLayout(
                     navController
                 ) {
-                    Series()
+                    Series(
+                        navController
+                    )
                 }
             }
             composable(Route.Details.route) {

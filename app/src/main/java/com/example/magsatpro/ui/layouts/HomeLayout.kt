@@ -1,6 +1,5 @@
 package com.example.magsatpro.ui.layouts
 
-import android.util.Log
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -29,9 +28,6 @@ fun HomeLayout(
 ) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
     val currentRoute = navController.currentBackStackEntry?.destination?.route
-
-    Log.e("current route", currentRoute.toString())
-
     fun onNavigate(route: String) {
         navController.navigate(route = route) {
             popUpTo(navController.graph.findStartDestination().id) {

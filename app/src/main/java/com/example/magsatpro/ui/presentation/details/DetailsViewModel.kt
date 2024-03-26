@@ -8,6 +8,7 @@ import com.example.magsatpro.stateModel.DetailsState
 import com.example.magsatpro.util.Resource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
@@ -41,7 +42,7 @@ class DetailsViewModel(
                             error = it.message
                         )
                     }
-                }
+                }.launchIn(viewModelScope)
 
                 "movie" -> movieRepo.getMovieInfo(id).onEach {
                     when (it) {
@@ -56,7 +57,7 @@ class DetailsViewModel(
                             error = it.message
                         )
                     }
-                }
+                }.launchIn(viewModelScope)
             }
         }
 
