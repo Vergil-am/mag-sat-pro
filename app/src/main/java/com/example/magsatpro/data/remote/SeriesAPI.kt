@@ -1,5 +1,6 @@
 package com.example.magsatpro.data.remote
 
+import com.example.magsatpro.data.remote.dto.series.EpisodesDTO
 import com.example.magsatpro.data.remote.dto.series.SeriesDTO
 import com.example.magsatpro.data.remote.dto.series.SeriesInfoDTO
 import com.example.magsatpro.util.Constants
@@ -28,5 +29,11 @@ interface SeriesAPI {
         @Query("hash") hash: String = Constants.HASH
     ) : Response<SeriesDTO>
 
+    @GET("android/serie")
+    suspend fun getEpisodes(
+        @Query("pid") pid: Int,
+        @Query("action") action: String = "infoEpisode",
+        @Query("hash") hash: String = Constants.HASH
+    ) : Response<EpisodesDTO>
 
 }

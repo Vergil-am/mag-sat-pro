@@ -1,8 +1,10 @@
 package com.example.magsatpro.data.repository
 
+import android.util.Log
 import com.example.magsatpro.data.remote.SeriesAPI
 import com.example.magsatpro.data.remote.dto.series.SeriesDTO
 import com.example.magsatpro.data.remote.dto.series.SeriesInfoDTO
+import com.example.magsatpro.data.remote.model.Episode
 import com.example.magsatpro.domain.repository.SeriesRepo
 import com.example.magsatpro.util.Resource
 import kotlinx.coroutines.flow.Flow
@@ -44,5 +46,17 @@ class SeriesRepoImplementation (
             emit(Resource.Error(""))
         }
 
+    }
+
+    override suspend fun getEpisodes(pid: Int): Flow<Resource<List<Episode>>>  = flow {
+        emit(Resource.Loading())
+        try {
+            val res = api.getEpisodes(pid)
+            Log.e("Episodes", res.body().toString())
+            emit(Resource.Success(res.body()))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            emit(Resource.Error("Fetching episodes failed ${e.message}"))
+        }
     }
 }
