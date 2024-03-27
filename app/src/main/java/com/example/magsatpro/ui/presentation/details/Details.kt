@@ -2,8 +2,6 @@ package com.example.magsatpro.ui.presentation.details
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,8 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Button
 import androidx.compose.material3.ListItem
@@ -28,7 +26,6 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
-import com.example.magsatpro.util.Constants
 import com.example.magsatpro.util.Constants.LOGO_BASE_URL
 import org.koin.androidx.compose.koinViewModel
 
@@ -56,7 +53,6 @@ fun Details(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(horizontal = 20.dp)
-                                .scrollable(rememberScrollState(), Orientation.Vertical)
                         ) {
                             Image(
                                 modifier = Modifier
@@ -107,7 +103,8 @@ fun Details(
                                     LazyColumn(
                                         state = rememberLazyListState()
                                     ) {
-                                        item {
+                                        items(episodes.episodes) {
+
                                             ListItem(
                                                 modifier = Modifier.clickable {
                                                     navController.navigate("exoplayer/serie/${it.id}")
