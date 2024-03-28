@@ -15,7 +15,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.AssistChip
-import androidx.compose.material3.Button
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,6 +25,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import com.example.magsatpro.ui.components.DetailsHeader
 import com.example.magsatpro.util.Constants.LOGO_BASE_URL
 import org.koin.androidx.compose.koinViewModel
 
@@ -52,48 +52,32 @@ fun Details(
                         Column(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .padding(horizontal = 20.dp)
                         ) {
-                            Image(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(200.dp),
-                                painter = rememberAsyncImagePainter(model = "${LOGO_BASE_URL}/vod/${it.id}"),
-                                contentDescription = it.nm
+                            DetailsHeader(
+                                id = it.id,
+                                title = it.nm,
+                                backDrop = "${LOGO_BASE_URL}/vod/${it.id}",
+                                poster = "${LOGO_BASE_URL}/serie/${it.id}",
+                                type = "serie",
+                                navController = navController
                             )
+                            Column(
+                                modifier = Modifier.padding(20.dp)
+                            ) {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                ) {
+                                    it.genre.split(",").map {
+                                        AssistChip(
+                                            modifier = Modifier.padding(horizontal = 6.dp),
+                                            onClick = { /*TODO*/ },
+                                            label = { Text(text = it) })
+                                    }
 
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceBetween
-                            ) {
-                                Text(text = it.date)
-                                Text(text = it.director)
-//                            Text(text = it.)
-                            }
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                            ) {
-                                it.genre.split(",").map {
-                                    AssistChip(
-                                        modifier = Modifier.padding(horizontal = 6.dp),
-                                        onClick = { /*TODO*/ },
-                                        label = { Text(text = it) })
                                 }
-
                             }
                             Text(text = it.plot)
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceAround
-                            ) {
-                                Button(onClick = { /*TODO*/ }) {
-                                    Text(text = "Add to favorites")
-                                }
-                            }
-
                             val episodes = state.episodes
 
 
@@ -141,59 +125,44 @@ fun Details(
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(horizontal = 20.dp)
                     ) {
 
                         movie?.let {
-                            Row {
-                                Image(
+                            DetailsHeader(
+                                id = it.id,
+                                title = it.nm,
+                                backDrop = "${LOGO_BASE_URL}/vod/${it.id}",
+                                poster = "${LOGO_BASE_URL}/vod/${it.id}",
+                                type = "movie",
+                                navController = navController
+                            )
+                            Column(
+                                modifier = Modifier.padding(20.dp)
+                            ) {
+
+                                Row(
                                     modifier = Modifier
-                                        .width(100.dp)
-                                        .height(150.dp),
-                                    painter = rememberAsyncImagePainter(model = "${LOGO_BASE_URL}/vod/${it.id}"),
-                                    contentDescription = it.nm
-                                )
-
-                            }
-
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceBetween
-                            ) {
-                                Text(text = it.year)
-                                Text(text = it.director)
-                                Text(text = it.rating)
-                            }
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                            ) {
-                                it.genre.split(",").map {
-                                    AssistChip(
-                                        modifier = Modifier.padding(horizontal = 6.dp),
-                                        onClick = { /*TODO*/ },
-                                        label = { Text(text = it) })
+                                        .fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween
+                                ) {
+                                    Text(text = it.year)
+                                    Text(text = it.director)
+                                    Text(text = it.rating)
                                 }
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                ) {
+                                    it.genre.split(",").map {
+                                        AssistChip(
+                                            modifier = Modifier.padding(horizontal = 6.dp),
+                                            onClick = { /*TODO*/ },
+                                            label = { Text(text = it) })
+                                    }
 
-                            }
-                            Text(text = it.plot)
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceAround
-                            ) {
-                                Button(onClick = { /*TODO*/ }) {
-                                    Text(text = "Add to favorites")
                                 }
-                                Button(onClick = {
-                                    navController.navigate("exoplayer/movie/$id")
-                                }) {
-                                    Text(text = "Watch now")
-                                }
-
+                                Text(text = it.plot)
                             }
-
                         }
                     }
                 }
