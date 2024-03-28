@@ -1,31 +1,32 @@
 package com.example.magsatpro.ui.presentation.details
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AssistChip
-import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.magsatpro.ui.components.DetailsHeader
+import com.example.magsatpro.ui.components.Episodes
 import com.example.magsatpro.util.Constants.LOGO_BASE_URL
 import org.koin.androidx.compose.koinViewModel
 
@@ -42,6 +43,8 @@ fun Details(
     val state = viewModel.state.collectAsState().value
     val screenWidth = LocalConfiguration.current.screenWidthDp
 
+    val episodes = state.episodes
+
     when (state.isLoading) {
         true -> Text(text = "Loading ...")
         false -> {
@@ -49,74 +52,124 @@ fun Details(
                 "serie" -> {
                     val serie = state.serie
                     serie?.get(0)?.let {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxSize()
-                        ) {
-                            DetailsHeader(
-                                id = it.id,
-                                title = it.nm,
-                                backDrop = "${LOGO_BASE_URL}/vod/${it.id}",
-                                poster = "${LOGO_BASE_URL}/serie/${it.id}",
-                                type = "serie",
-                                navController = navController
-                            )
-                            Column(
-                                modifier = Modifier.padding(20.dp)
-                            ) {
-                                Row(
+                        when {
+                            screenWidth < 600 -> {
+                                Column(
                                     modifier = Modifier
-                                        .fillMaxWidth()
+                                        .fillMaxSize()
                                 ) {
-                                    it.genre.split(",").map {
-                                        AssistChip(
-                                            modifier = Modifier.padding(horizontal = 6.dp),
-                                            onClick = { /*TODO*/ },
-                                            label = { Text(text = it) })
-                                    }
-
-                                }
-                            }
-                            Text(text = it.plot)
-                            val episodes = state.episodes
-
-
-                            when (episodes.isLoading) {
-                                true -> Text(text = "Loading ... ")
-                                false -> episodes.episodes?.map {
-                                    LazyColumn(
-                                        state = rememberLazyListState()
+                                    DetailsHeader(
+                                        id = it.id,
+                                        title = it.nm,
+                                        backDrop = "${LOGO_BASE_URL}/vod/${it.id}",
+                                        poster = "${LOGO_BASE_URL}/serie/${it.id}",
+                                        type = "serie",
+                                        navController = navController
+                                    )
+                                    Column(
+                                        modifier = Modifier.padding(20.dp)
                                     ) {
-                                        items(episodes.episodes) {
+                                        Row(
+                                            modifier = Modifier
+                                                .fillMaxWidth()
+                                        ) {
+                                            it.genre.split(",").map {
+                                                AssistChip(
+                                                    modifier = Modifier.padding(horizontal = 6.dp),
+                                                    onClick = { /*TODO*/ },
+                                                    label = { Text(text = it) })
+                                            }
 
-                                            ListItem(
-                                                modifier = Modifier.clickable {
-                                                    navController.navigate("exoplayer/serie/${it.id}")
-                                                },
-                                                leadingContent = {
-                                                    Box(
-                                                        modifier = Modifier
-                                                            .width(200.dp)
-                                                            .height(100.dp)
-                                                    ) {
-                                                        Image(
-                                                            modifier = Modifier.fillMaxSize(),
-                                                            painter = rememberAsyncImagePainter(
-                                                                model = "$LOGO_BASE_URL/vod/${it.id}"
-                                                            ), contentDescription = it.nm
-                                                        )
-                                                    }
+                                        }
+                                        Text(text = it.plot)
+                                    }
+                                    when (episodes.isLoading) {
+                                        true -> Text(text = "Loading ... ")
+                                        false -> episodes.episodes?.let { it1 ->
+                                            Episodes(
+                                                episodes = it1,
+                                                navController = navController
+                                            )
+                                        }
 
-                                                },
-                                                headlineContent = {
-                                                    Text(text = it.nm)
-                                                })
+                                    }
+                                }
+
+                            }
+
+                            screenWidth > 600 -> {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                ) {
+                                    Image(
+                                        modifier = Modifier
+                                            .fillMaxSize()
+                                            .blur(15.dp),
+                                        contentScale = ContentScale.Crop,
+                                        painter = rememberAsyncImagePainter(
+                                            model = "${LOGO_BASE_URL}/vod/${it.id}"
+                                        ),
+                                        contentDescription = it.nm
+                                    )
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxSize()
+                                            .background(
+                                                MaterialTheme.colorScheme.background.copy(
+                                                    alpha = 0.5f
+                                                )
+                                            )
+                                    )
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxHeight()
+                                            .fillMaxWidth()
+                                    ) {
+                                        Column(
+                                            modifier = Modifier
+                                                .padding(20.dp)
+                                                .fillMaxWidth(0.5f)
+                                                .verticalScroll(rememberScrollState())
+                                        ) {
+                                            DetailsHeader(
+                                                id = it.id,
+                                                title = it.nm,
+                                                backDrop = "",
+                                                poster = "${LOGO_BASE_URL}/serie/${it.id}",
+                                                type = "serie",
+                                                navController = navController
+                                            )
+
+                                            Row(
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                            ) {
+                                                it.genre.split(",").map {
+                                                    AssistChip(
+                                                        modifier = Modifier.padding(horizontal = 6.dp),
+                                                        onClick = { /*TODO*/ },
+                                                        label = { Text(text = it) })
+                                                }
+
+                                            }
+                                            Text(text = it.plot)
+                                        }
+                                        when (episodes.isLoading) {
+                                            true -> Text(text = "Loading ... ")
+                                            false -> episodes.episodes?.let { it1 ->
+                                                Episodes(
+                                                    episodes = it1,
+                                                    navController = navController
+                                                )
+                                            }
+
                                         }
                                     }
                                 }
-
                             }
                         }
+
                     }
                 }
 

@@ -54,7 +54,9 @@ fun HomeLayout(
             if (screenWidth >= 600) {
                 NavRail(items = navItems,
                     selected = currentRoute,
-                    onNavigate = {})
+                    onNavigate = {
+                        route -> onNavigate(route)
+                    })
             }
             composable()
         }

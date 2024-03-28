@@ -35,7 +35,6 @@ fun NavRail(
                 onNavigate(it.value)
             }, icon = {
                 Icon(
-
                     modifier = Modifier.height(30.dp),
                     painter = painterResource(id = it.icon),
                     contentDescription = it.title

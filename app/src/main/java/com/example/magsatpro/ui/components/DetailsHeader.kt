@@ -25,6 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -41,26 +42,36 @@ fun DetailsHeader(
     type: String,
     navController: NavController
 ) {
+    val screenWidth = LocalConfiguration.current.screenWidthDp
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(250.dp)
     ) {
-        Image(
-            modifier = Modifier
-                .fillMaxSize()
-                .blur(5.dp),
-            contentScale = ContentScale.Crop,
-            painter = rememberAsyncImagePainter(model = backDrop), contentDescription = title
-        )
+        if (screenWidth < 600) {
+            Image(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .blur(5.dp),
+                contentScale = ContentScale.Crop,
+                painter = rememberAsyncImagePainter(model = backDrop), contentDescription = title
+            )
+        }
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    Brush.verticalGradient(
-                        colors = listOf(Color.Transparent, MaterialTheme.colorScheme.background),
+            modifier = if (screenWidth < 600) {
+                Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                MaterialTheme.colorScheme.background
+                            ),
+                        )
                     )
-                )
+            } else {
+                Modifier.fillMaxSize()
+            }
         ) {
         }
         Row(
@@ -90,12 +101,6 @@ fun DetailsHeader(
                     text = Ascii.toUpperCase(title),
                     style = MaterialTheme.typography.titleMedium,
                 )
-//                Text(
-//                    text = status,
-//                    style =
-//                    MaterialTheme.typography.labelLarge,
-//                )
-
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
